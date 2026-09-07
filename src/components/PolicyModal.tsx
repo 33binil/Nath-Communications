@@ -15,7 +15,7 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
 
   const faqs = [
     {
-      q: 'Are all products at Nath Digital Hub 100% genuine and brand new?',
+      q: 'Are all products at Nath Communications 100% genuine and brand new?',
       a: 'Yes! We are direct authorized retail partners with Apple, Samsung, Sony, HP, Dell, Asus, Xiaomi, boAt, and JBL. Every product comes in factory-sealed packaging with official manufacturer warranty and tax invoice.',
     },
     {
@@ -28,7 +28,7 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
     },
     {
       q: 'How does after-sales warranty support work?',
-      a: 'If you ever encounter an issue, you do not have to handle complicated warranty claims alone. Bring the product to Nath Digital Hub, and our service desk coordinates directly with the brand service centers for repair or replacement.',
+      a: 'If you ever encounter an issue, you do not have to handle complicated warranty claims alone. Bring the product to Nath Communications, and our service desk coordinates directly with the brand service centers for repair or replacement.',
     },
   ];
 
@@ -53,14 +53,14 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
               {(type === 'privacy' || type === 'terms') && <FileText className="w-5 h-5" />}
             </div>
             <div>
-              <h3 className="text-xl font-extrabold text-white">
+              <h3 className="text-2xl font-extrabold text-white">
                 {type === 'faq' && 'Frequently Asked Questions'}
                 {type === 'warranty' && 'Official Warranty & Returns Policy'}
                 {type === 'track' && 'Track Your Gadget Order'}
                 {type === 'privacy' && 'Privacy Policy'}
                 {type === 'terms' && 'Terms & Conditions'}
               </h3>
-              <p className="text-xs text-slate-400">Nath Digital Hub Customer Assurance</p>
+              <p className="text-sm text-slate-400">Nath Communications Customer Assurance</p>
             </div>
           </div>
 
@@ -84,7 +84,7 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
                 >
                   <button
                     onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                    className="w-full text-left p-4 font-bold text-slate-900 text-sm flex items-center justify-between gap-3 hover:bg-slate-50 transition-colors"
+                    className="w-full text-left p-4 font-bold text-slate-900 text-base flex items-center justify-between gap-3 hover:bg-slate-50 transition-colors"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown
@@ -94,7 +94,7 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
                     />
                   </button>
                   {activeFaq === idx && (
-                    <div className="p-4 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50/50 border-t border-slate-100">
+                    <div className="p-4 pt-0 text-sm sm:text-base text-slate-600 leading-relaxed bg-slate-50/50 border-t border-slate-100">
                       {faq.a}
                     </div>
                   )}
@@ -104,10 +104,10 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
           )}
 
           {type === 'warranty' && (
-            <div className="space-y-4 text-slate-700 text-xs sm:text-sm leading-relaxed">
+            <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
               <div className="p-4 rounded-2xl bg-red-50/60 border border-red-200/60 text-slate-900 font-semibold flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-red-600 flex-shrink-0" />
-                <span>All devices sold at Nath Digital Hub carry 100% genuine brand manufacturer warranty.</span>
+                <span>All devices sold at Nath Communications carry 100% genuine brand manufacturer warranty.</span>
               </div>
               <p>
                 <strong>1. Standard Brand Warranty:</strong> We issue authorized tax invoices that register your hardware serial number directly on official OEM databases (AppleCare, Samsung Care, etc.).
@@ -123,8 +123,8 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
 
           {type === 'track' && (
             <div className="space-y-4">
-              <p className="text-xs sm:text-sm text-slate-600">
-                Enter your Nath Digital Hub Order ID or Mobile Number to check real-time dispatch and delivery status.
+              <p className="text-sm sm:text-base text-slate-600">
+                Enter your Nath Communications Order ID or Mobile Number to check real-time dispatch and delivery status.
               </p>
               <form onSubmit={handleTrack} className="flex gap-2">
                 <input
@@ -133,18 +133,18 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
                   placeholder="e.g. NDH-89423 or 9845012345"
                   value={trackingId}
                   onChange={(e) => setTrackingId(e.target.value)}
-                  className="flex-1 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
+                  className="flex-1 text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
                 />
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl cursor-pointer"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl cursor-pointer"
                 >
                   Track Order
                 </button>
               </form>
 
               {trackingResult && (
-                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-900 text-xs sm:text-sm font-medium">
+                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-900 text-sm sm:text-base font-medium">
                   {trackingResult}
                 </div>
               )}
@@ -152,9 +152,9 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
           )}
 
           {(type === 'privacy' || type === 'terms') && (
-            <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <div className="space-y-3 text-sm sm:text-base text-slate-600 leading-relaxed">
               <p>
-                At Nath Digital Hub, protecting your privacy and ensuring transparent service is our primary pledge. We only collect the necessary contact details to process invoices, fulfill warranties, and send requested updates.
+                At Nath Communications, protecting your privacy and ensuring transparent service is our primary pledge. We only collect the necessary contact details to process invoices, fulfill warranties, and send requested updates.
               </p>
               <p>
                 All electronic transactions, serial registrations, and customer records are safeguarded using industry standard encryption. We never sell or share customer personal information with unauthorized third parties.
@@ -167,7 +167,7 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
         <div className="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
           <button
             onClick={onClose}
-            className="bg-slate-900 hover:bg-black text-white text-xs font-bold px-5 py-2.5 rounded-full cursor-pointer"
+            className="bg-slate-900 hover:bg-black text-white text-sm font-bold px-5 py-2.5 rounded-full cursor-pointer"
           >
             Close
           </button>

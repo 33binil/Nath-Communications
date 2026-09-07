@@ -21,19 +21,19 @@ export function TestimonialsSection() {
 
   return (
     <section className="py-10 sm:py-14 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Carousel Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-slate-600 uppercase">
+            <div className="inline-flex items-center gap-2 text-sm sm:text-base font-bold tracking-[0.18em] text-slate-600 uppercase">
               <span className="w-4 h-[2px] bg-[#E02424] rounded-full" />
               <span>WHAT OUR CUSTOMERS SAY</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold text-slate-950 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-950 tracking-tight">
               Trusted by Tech Lovers
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm">
+            <p className="text-slate-500 text-base sm:text-lg">
               Real people. Real experiences.
             </p>
           </div>
@@ -75,7 +75,7 @@ export function TestimonialsSection() {
                   referrerPolicy="no-referrer"
                 />
                 <div>
-                  <span className="font-bold text-slate-950 text-sm">
+                  <span className="font-bold text-slate-950 text-lg">
                     {testimonial.name}
                   </span>
                   {/* 5 Stars */}
@@ -91,7 +91,7 @@ export function TestimonialsSection() {
               </div>
 
               {/* Review Text */}
-              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed font-normal">
+              <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-normal">
                 {testimonial.comment}
               </p>
             </div>

@@ -14,24 +14,24 @@ export function PromoDealsBanner({ onViewOffers }: PromoDealsBannerProps) {
 
   return (
     <section className="py-8 sm:py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl bg-[#090b10] overflow-hidden text-white shadow-xl border border-slate-900">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 lg:p-12">
             
             {/* Left Content */}
             <div className="lg:col-span-4 space-y-3.5 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.16em] text-red-500 uppercase">
+              <div className="inline-flex items-center gap-2 text-sm sm:text-base font-bold tracking-[0.16em] text-red-500 uppercase">
                 <span className="w-4 h-[2px] bg-red-500 rounded-full" />
                 <span>LIMITED TIME</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-white">
+              <h2 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white">
                 Great Tech <br />
                 Great Deals
               </h2>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-300 text-lg sm:text-xl leading-relaxed">
                 Exclusive offers on your favourite gadgets.
               </p>
 
@@ -39,7 +39,7 @@ export function PromoDealsBanner({ onViewOffers }: PromoDealsBannerProps) {
                 <button
                   id="promo-view-offers-btn"
                   onClick={onViewOffers}
-                  className="inline-flex items-center gap-2.5 bg-white hover:bg-slate-100 text-slate-950 font-semibold px-5 py-2.5 rounded-full text-xs sm:text-sm transition-all duration-200 shadow-md cursor-pointer group"
+                  className="inline-flex items-center gap-2.5 bg-white hover:bg-slate-100 text-slate-950 font-semibold px-5 py-2.5 rounded-full text-base sm:text-lg transition-all duration-200 shadow-md cursor-pointer group"
                 >
                   <span>View Offers</span>
                   <span className="w-4 h-4 rounded-full bg-slate-950 text-white flex items-center justify-center">
@@ -54,9 +54,9 @@ export function PromoDealsBanner({ onViewOffers }: PromoDealsBannerProps) {
               <div className="relative group w-full max-w-md">
                 <div className="rounded-2xl overflow-hidden bg-transparent flex items-center justify-center">
                   <img
-                    src="https://images.unsplash.com/photo-1468495244123-6c6c332eeede?q=80&w=900&auto=format&fit=crop"
+                    src="/gadgets.png"
                     alt="Gadget Lineup Deals"
-                    className="w-full h-auto object-cover rounded-2xl group-hover:scale-102 transition-transform duration-500 shadow-2xl"
+                    className="w-full h-full object-contain rounded-2xl group-hover:scale-102 transition-transform duration-500 shadow-2xl"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -70,7 +70,7 @@ export function PromoDealsBanner({ onViewOffers }: PromoDealsBannerProps) {
                   <div className="w-8 h-8 rounded-full border border-slate-700/80 flex items-center justify-center flex-shrink-0">
                     {perk.icon}
                   </div>
-                  <div className="font-semibold text-slate-200 text-sm sm:text-[15px]">
+                  <div className="font-semibold text-slate-200 text-lg sm:text-xl">
                     {perk.title}
                   </div>
                 </div>

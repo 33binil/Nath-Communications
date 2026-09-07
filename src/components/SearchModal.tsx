@@ -58,7 +58,7 @@ export function SearchModal({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search phones, laptops, AirPods, Sony ANC, chargers..."
-            className="w-full text-slate-900 placeholder:text-slate-400 font-medium text-sm sm:text-base focus:outline-none"
+            className="w-full text-slate-900 placeholder:text-slate-400 font-medium text-base focus:outline-none"
           />
           {query && (
             <button
@@ -82,7 +82,7 @@ export function SearchModal({
             <button
               key={tag.value}
               onClick={() => setActiveFilter(tag.value)}
-              className={`text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap transition-colors cursor-pointer ${
+              className={`text-sm font-semibold px-3 py-1.5 rounded-full whitespace-nowrap transition-colors cursor-pointer ${
                 activeFilter === tag.value
                   ? 'bg-red-600 text-white shadow-xs'
                   : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -116,19 +116,19 @@ export function SearchModal({
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold text-red-600 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-red-600 uppercase tracking-wide">
                       {product.brand}
                     </span>
                     {product.badge && (
-                      <span className="text-[9px] font-bold bg-slate-900 text-white px-1.5 py-0.5 rounded-full">
+                      <span className="text-xs font-bold bg-slate-900 text-white px-1.5 py-0.5 rounded-full">
                         {product.badge}
                       </span>
                     )}
                   </div>
-                  <h4 className="font-bold text-slate-900 text-sm truncate group-hover:text-red-600 transition-colors">
+                  <h4 className="font-bold text-slate-900 text-base truncate group-hover:text-red-600 transition-colors">
                     {product.name}
                   </h4>
-                  <div className="flex items-center gap-3 text-xs text-slate-500 mt-0.5">
+                  <div className="flex items-center gap-3 text-sm text-slate-500 mt-0.5">
                     <span className="font-extrabold text-slate-900">${product.price}</span>
                     {product.originalPrice && (
                       <span className="line-through text-slate-400">${product.originalPrice}</span>
@@ -146,15 +146,15 @@ export function SearchModal({
             ))
           ) : (
             <div className="py-12 text-center text-slate-500 space-y-2">
-              <p className="font-semibold text-slate-700">No matching products found</p>
-              <p className="text-xs">Try searching for "iPhone", "MacBook", "Sony", or "Charger".</p>
+              <p className="font-semibold text-slate-700 text-base">No matching products found</p>
+              <p className="text-sm">Try searching for "iPhone", "MacBook", "Sony", or "Charger".</p>
             </div>
           )}
         </div>
 
         {/* Footer info */}
-        <div className="p-3 bg-slate-50 border-t border-slate-100 text-center text-xs text-slate-500">
-          Showing verified in-stock items at Nath Digital Hub Store
+        <div className="p-3 bg-slate-50 border-t border-slate-100 text-center text-sm text-slate-500">
+          Showing verified in-stock items at Nath Communications Store
         </div>
 
       </div>

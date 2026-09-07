@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageCircle, MapPin, Sparkles } from 'lucide-react';
+import { MessageCircle, MapPin, X } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { CategoryStrip } from './components/CategoryStrip';
@@ -25,31 +25,14 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isStoreModalOpen, setIsStoreModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const [contactDefaultTopic, setContactDefaultTopic] = useState('General Tech Inquiry');
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [policyModalType, setPolicyModalType] = useState<'privacy' | 'terms' | 'faq' | 'warranty' | 'track' | null>(null);
 
-  // Track scroll position to highlight active navbar item
+  // Navbar always highlights Home
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'products', 'services', 'contact'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const top = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setActiveSection('home');
   }, []);
 
   const handleSelectQuickCategory = (slug: string) => {
@@ -120,6 +103,7 @@ export default function App() {
           setContactDefaultTopic('General Inquiry');
           setIsContactModalOpen(true);
         }}
+        onComingSoon={() => setIsComingSoonOpen(true)}
       />
 
       <main className="flex-grow">
@@ -178,7 +162,7 @@ export default function App() {
       <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-auto">
         <button
           onClick={() => setIsStoreModalOpen(true)}
-          className="hidden sm:inline-flex items-center gap-2 bg-slate-900/90 hover:bg-black text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-lg backdrop-blur-md border border-slate-700 transition-all hover:scale-105 cursor-pointer"
+          className="hidden sm:inline-flex items-center gap-2 bg-slate-900/90 hover:bg-black text-white text-sm font-bold py-2.5 px-4 rounded-full shadow-lg backdrop-blur-md border border-slate-700 transition-all hover:scale-105 cursor-pointer"
         >
           <MapPin className="w-3.5 h-3.5 text-red-500" />
           <span>Showroom Directions</span>
@@ -226,6 +210,39 @@ export default function App() {
         onClose={() => setIsContactModalOpen(false)}
         defaultTopic={contactDefaultTopic}
       />
+
+      {/* Coming Soon Overlay */}
+      {isComingSoonOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="relative bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden p-8">
+            <button
+              onClick={() => setIsComingSoonOpen(false)}
+              aria-label="Close"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="text-center space-y-3">
+              <div className="w-16 h-16 mx-auto rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl font-black text-amber-600">
+                !
+              </div>
+              <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                Coming Soon
+              </h3>
+              <p className="text-slate-600 text-base leading-relaxed max-w-xs mx-auto">
+                This section is under construction. Stay tuned for exciting updates!
+              </p>
+              <button
+                onClick={() => setIsComingSoonOpen(false)}
+                className="mt-3 inline-flex items-center justify-center bg-slate-900 hover:bg-black text-white font-semibold text-base px-6 py-3 rounded-full transition-all cursor-pointer"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

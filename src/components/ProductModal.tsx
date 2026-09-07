@@ -26,7 +26,7 @@ export function ProductModal({
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Nath Digital Hub! I am interested in inquiring about ${product.name} (Price: $${product.price}). Please confirm stock availability.`
+    `Hello Nath Communications! I am interested in inquiring about ${product.name} (Price: $${product.price}). Please confirm stock availability.`
   );
 
   return (
@@ -53,13 +53,13 @@ export function ProductModal({
                 referrerPolicy="no-referrer"
               />
               {product.badge && (
-                <span className="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                   {product.badge}
                 </span>
               )}
             </div>
 
-            <div className="mt-4 space-y-2 text-xs text-slate-600">
+            <div className="mt-4 space-y-2 text-sm text-slate-600">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span className="font-semibold">{product.warranty}</span>
@@ -78,10 +78,10 @@ export function ProductModal({
           {/* Right Column: Info & Actions */}
           <div className="md:col-span-7 p-6 space-y-5">
             <div>
-              <span className="text-xs font-bold text-red-600 tracking-wider uppercase">
+              <span className="text-sm font-bold text-red-600 tracking-wider uppercase">
                 {product.brand} Official
               </span>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight mt-1">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mt-1">
                 {product.name}
               </h3>
 
@@ -99,37 +99,37 @@ export function ProductModal({
                     />
                   ))}
                 </div>
-                <span className="text-xs font-bold text-slate-800">{product.rating}</span>
-                <span className="text-xs text-slate-400">({product.reviewsCount} verified reviews)</span>
+                <span className="text-sm font-bold text-slate-800">{product.rating}</span>
+                <span className="text-sm text-slate-400">({product.reviewsCount} verified reviews)</span>
               </div>
             </div>
 
             {/* Price Row */}
             <div className="flex items-baseline gap-3 p-3.5 bg-slate-50 rounded-2xl border border-slate-100">
-              <span className="text-3xl font-black text-slate-900">${product.price}</span>
+              <span className="text-4xl font-black text-slate-900">${product.price}</span>
               {product.originalPrice && (
-                <span className="text-base line-through text-slate-400 font-medium">
+                <span className="text-lg line-through text-slate-400 font-medium">
                   ${product.originalPrice}
                 </span>
               )}
               {product.discountPercentage && (
-                <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded-full">
+                <span className="bg-emerald-100 text-emerald-800 text-sm font-bold px-2 py-0.5 rounded-full">
                   Save {product.discountPercentage}%
                 </span>
               )}
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               {product.description}
             </p>
 
             {/* Key Features Bullet Points */}
             <div className="space-y-2">
-              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 Key Highlights
               </h4>
-              <ul className="grid grid-cols-1 gap-1.5 text-xs text-slate-700">
+              <ul className="grid grid-cols-1 gap-1.5 text-sm text-slate-700">
                 {product.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-red-600 flex-shrink-0" />
@@ -141,9 +141,9 @@ export function ProductModal({
 
             {/* In-Store Reserve Status */}
             {reserved && (
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-semibold flex items-center gap-2">
+              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-sm font-semibold flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Reserved for you for 24 hours at Nath Digital Hub Store!</span>
+                <span>Reserved for you for 24 hours at Nath Communications Store!</span>
               </div>
             )}
 
@@ -152,7 +152,7 @@ export function ProductModal({
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleReserve}
-                  className="flex-1 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm py-3 px-4 rounded-xl transition-all shadow-md shadow-red-600/20 cursor-pointer"
+                  className="flex-1 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-base py-3 px-4 rounded-xl transition-all shadow-md shadow-red-600/20 cursor-pointer"
                 >
                   {reserved ? 'Item Reserved ✓' : 'Hold & Reserve in Store'}
                 </button>
@@ -175,7 +175,7 @@ export function ProductModal({
                   href={`https://wa.me/919845012345?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold py-2.5 px-3 rounded-xl transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>WhatsApp Inquire</span>
@@ -186,7 +186,7 @@ export function ProductModal({
                     onClose();
                     onOpenStoreModal();
                   }}
-                  className="inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold py-2.5 px-3 rounded-xl transition-colors cursor-pointer"
                 >
                   <MapPin className="w-4 h-4 text-red-600" />
                   <span>Visit Showroom</span>

@@ -43,7 +43,7 @@ export function CategoryStrip({
 
   return (
     <section className="py-4 bg-white border-y border-slate-100 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Scrollable on mobile, flex grid on desktop */}
         <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2 sm:grid sm:grid-cols-4 md:grid-cols-8">
           {QUICK_CATEGORIES.map((cat) => {
@@ -67,7 +67,7 @@ export function CategoryStrip({
                 >
                   {getIcon(cat.iconName)}
                 </div>
-                <span className="text-xs font-semibold tracking-tight whitespace-nowrap">
+                <span className="text-base font-semibold tracking-tight whitespace-nowrap">
                   {cat.name}
                 </span>
               </button>

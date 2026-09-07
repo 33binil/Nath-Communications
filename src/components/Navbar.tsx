@@ -6,6 +6,7 @@ interface NavbarProps {
   onOpenSearch: () => void;
   onOpenStoreModal: () => void;
   onOpenContactModal: () => void;
+  onComingSoon: () => void;
   activeSection: string;
 }
 
@@ -13,6 +14,7 @@ export function Navbar({
   onOpenSearch,
   onOpenStoreModal,
   onOpenContactModal,
+  onComingSoon,
   activeSection,
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,11 +38,15 @@ export function Navbar({
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setIsMobileMenuOpen(false);
+    if (href !== '#home') {
+      onComingSoon();
+      return;
+    }
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -51,7 +57,7 @@ export function Navbar({
           : 'bg-white/80 backdrop-blur-sm py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
           <a
@@ -71,7 +77,7 @@ export function Navbar({
                   key={link.id}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`text-sm font-medium transition-colors relative py-1 ${
+                  className={`text-lg font-medium transition-colors relative py-1 ${
                     isActive
                       ? 'text-red-600 font-semibold'
                       : 'text-slate-600 hover:text-slate-900'
@@ -102,7 +108,7 @@ export function Navbar({
             <button
               id="navbar-visit-store-btn"
               onClick={onOpenStoreModal}
-              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm shadow-red-600/20 hover:shadow-md hover:shadow-red-600/30 cursor-pointer"
+              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-base sm:text-lg font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm shadow-red-600/20 hover:shadow-md hover:shadow-red-600/30 cursor-pointer"
             >
               <span>Visit Store</span>
               <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
@@ -143,7 +149,7 @@ export function Navbar({
                 key={link.id}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`block px-3 py-2.5 rounded-lg text-base font-medium ${
+                className={`block px-3 py-2.5 rounded-lg text-xl font-medium ${
                   activeSection === link.id
                     ? 'bg-red-50 text-red-600 font-semibold'
                     : 'text-slate-700 hover:bg-slate-50'
@@ -160,7 +166,7 @@ export function Navbar({
                 setIsMobileMenuOpen(false);
                 onOpenStoreModal();
               }}
-              className="w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl shadow-sm cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-3 px-4 rounded-xl shadow-sm cursor-pointer"
             >
               <MapPin className="w-4 h-4" />
               <span>Visit Showroom & Store</span>
@@ -172,7 +178,7 @@ export function Navbar({
                 setIsMobileMenuOpen(false);
                 onOpenContactModal();
               }}
-              className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium py-2.5 px-4 rounded-xl cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-lg font-medium py-2.5 px-4 rounded-xl cursor-pointer"
             >
               <PhoneCall className="w-4 h-4 text-red-600" />
               <span>Contact Tech Specialist</span>

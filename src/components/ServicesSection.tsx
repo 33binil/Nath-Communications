@@ -27,19 +27,19 @@ export function ServicesSection({
 
   return (
     <section id="services" className="py-10 sm:py-14 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-slate-600 uppercase">
+            <div className="inline-flex items-center gap-2 text-sm sm:text-base font-bold tracking-[0.18em] text-slate-600 uppercase">
               <span className="w-4 h-[2px] bg-[#E02424] rounded-full" />
               <span>OUR SERVICES</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-extrabold text-slate-950 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-950 tracking-tight">
               More Support, Less Worry
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm">
+            <p className="text-slate-500 text-base sm:text-lg">
               We're here beyond the sale.
             </p>
           </div>
@@ -48,7 +48,7 @@ export function ServicesSection({
             <button
               id="view-all-services-btn"
               onClick={onViewAllServices}
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full border border-slate-300 transition-all duration-200 cursor-pointer group"
+              className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 text-base sm:text-lg font-semibold px-4 py-2 rounded-full border border-slate-300 transition-all duration-200 cursor-pointer group"
             >
               <span>View All Services</span>
               <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:translate-x-0.5 transition-transform" />
@@ -69,11 +69,11 @@ export function ServicesSection({
                 {getIcon(service.iconName)}
               </div>
 
-              <h3 className="text-sm sm:text-base font-bold text-slate-950 mb-1.5 group-hover:text-[#E02424] transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-950 mb-1.5 group-hover:text-[#E02424] transition-colors">
                 {service.title}
               </h3>
 
-              <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
                 {service.description}
               </p>
             </div>
