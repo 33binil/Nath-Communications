@@ -18,8 +18,7 @@ import { ProductModal } from './components/ProductModal';
 import { PolicyModal } from './components/PolicyModal';
 import { ContactModal } from './components/ContactModal';
 import { LoadingScreen } from './components/LoadingScreen';
-import { FEATURED_PRODUCTS, MAIN_CATEGORIES } from './data/mockData';
-import { CategoryItem, ProductItem, ServiceItem } from './types';
+import { ServiceItem, ProductItem } from './types';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -44,32 +43,16 @@ export default function App() {
       const el = document.getElementById('products');
       el?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // Find matching products or open search filtered by this category
-      const matched = FEATURED_PRODUCTS.find((p) => p.category === slug);
-      if (matched) {
-        setSelectedProduct(matched);
-      } else {
-        setIsSearchOpen(true);
-      }
+      setIsComingSoonOpen(true);
     }
   };
 
-  const handleSelectCategoryCard = (category: CategoryItem) => {
-    const matched = FEATURED_PRODUCTS.find((p) => p.category === category.slug);
-    if (matched) {
-      setSelectedProduct(matched);
-    } else {
-      setIsSearchOpen(true);
-    }
+  const handleSelectCategoryCard = () => {
+    setIsComingSoonOpen(true);
   };
 
-  const handleSelectBrand = (brandName: string) => {
-    const matched = FEATURED_PRODUCTS.find((p) => p.brand.toLowerCase() === brandName.toLowerCase());
-    if (matched) {
-      setSelectedProduct(matched);
-    } else {
-      setIsSearchOpen(true);
-    }
+  const handleSelectBrand = () => {
+    setIsComingSoonOpen(true);
   };
 
   const handleSelectService = (service: ServiceItem) => {
@@ -78,16 +61,11 @@ export default function App() {
   };
 
   const handleExploreIPhone = () => {
-    const iphone = FEATURED_PRODUCTS.find((p) => p.id === 'p-iphone16');
-    if (iphone) {
-      setSelectedProduct(iphone);
-    } else {
-      setIsSearchOpen(true);
-    }
+    setIsComingSoonOpen(true);
   };
 
   const handleViewOffers = () => {
-    setIsSearchOpen(true);
+    setIsComingSoonOpen(true);
   };
 
   const scrollToSection = (id: string) => {

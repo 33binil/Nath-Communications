@@ -7,7 +7,7 @@ interface LogoProps {
 
 export function Logo({ size = 'md', className = '' }: LogoProps) {
   const heightClass =
-    size === 'sm' ? 'h-8' : size === 'lg' ? 'h-14' : 'h-11';
+    size === 'sm' ? 'h-10' : size === 'lg' ? 'h-14' : 'h-12';
 
   return (
     <div className={`flex items-center select-none ${className}`}>
