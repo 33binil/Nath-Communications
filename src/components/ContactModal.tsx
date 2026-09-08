@@ -32,40 +32,40 @@ export function ContactModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="relative bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 md:p-6 animate-in fade-in duration-200">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col">
         
-        {/* Header */}
-        <div className="bg-[#0f141c] text-white p-6 sm:p-7 relative">
+        {/* Header - Pinned at top of modal so it is never cut off */}
+        <div className="bg-[#0f141c] text-white p-4 sm:p-6 md:p-7 relative shrink-0 border-b border-slate-800">
           <button
             onClick={onClose}
             aria-label="Close"
-            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer z-10"
           >
             <X className="w-4 h-4" />
           </button>
 
           <Logo variant="dark" size="sm" />
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-4">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-2 sm:mt-3 leading-tight">
             Connect with a Tech Specialist
           </h3>
-          <p className="text-slate-400 text-sm sm:text-base mt-1">
+          <p className="text-slate-400 text-xs sm:text-sm mt-1 leading-relaxed max-w-md">
             Need advice on laptop specs, phone upgrade offers, or warranty support? We're here to help.
           </p>
         </div>
 
-        {/* Form Body */}
-        <div className="p-6 sm:p-7 space-y-5">
+        {/* Form Body - Smoothly scrollable on small mobile screens */}
+        <div className="p-4 sm:p-6 md:p-7 space-y-4 sm:space-y-5 overflow-y-auto flex-1 overscroll-contain">
           {sent ? (
             <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
               <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
               <h4 className="font-bold text-slate-900 text-lg">Inquiry Received!</h4>
               <p className="text-sm text-slate-600 max-w-xs mx-auto">
-                Our  tecNath Communications specialist will call or WhatsApp you within 15 minutes during store hours.
+                Our Nath Communications tech specialist will call or WhatsApp you within 15 minutes during store hours.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3.5">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
                 <input
@@ -74,7 +74,7 @@ export function ContactModal({
                   placeholder="e.g. Anand Kumar"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
+                  className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
                 />
               </div>
 
@@ -87,7 +87,7 @@ export function ContactModal({
                     placeholder="+91 98765 43210"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
+                    className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
                   />
                 </div>
 
@@ -98,7 +98,7 @@ export function ContactModal({
                     placeholder="yourname@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
+                    className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -108,7 +108,7 @@ export function ContactModal({
                 <select
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
-                  className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
+                  className="w-full text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:py-2.5 text-slate-900 focus:outline-none focus:border-red-500"
                 >
                   <option value="Product Guidance">Product Guidance & Device Recommendation</option>
                   <option value="Exchange / Trade-in">Old Device Exchange & Valuation</option>
@@ -125,18 +125,18 @@ export function ContactModal({
                   placeholder="Tell us what you're looking for or how we can assist..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-red-500 resize-none"
+                  className="w-full text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:py-2.5 text-slate-900 focus:outline-none focus:border-red-500 resize-none"
                 />
               </div>
 
-              <div className="pt-2 flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-sm text-slate-500">
-                  <PhoneCall className="w-3.5 h-3.5 text-red-600" />
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500">
+                  <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
                   <span>Call back guaranteed</span>
                 </div>
                 <button
                   type="submit"
-                  className="bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm sm:text-base px-6 py-2.5 rounded-full transition-all cursor-pointer shadow-md shadow-red-600/20"
+                  className="bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm sm:text-base px-6 py-2.5 rounded-full transition-all cursor-pointer shadow-md shadow-red-600/20 w-full sm:w-auto text-center"
                 >
                   Submit Inquiry
                 </button>
@@ -145,19 +145,19 @@ export function ContactModal({
           )}
 
           {/* Quick Direct Contacts */}
-          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-around gap-4 text-sm text-slate-600">
+          <div className="pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-around gap-3 text-xs sm:text-sm text-slate-600">
             <a
               href="tel:+919845012345"
               className="flex items-center gap-1.5 hover:text-red-600 font-semibold"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-red-600" />
+              <PhoneCall className="w-3.5 h-3.5 text-red-600 shrink-0" />
               <span>+91 98450 12345</span>
             </a>
             <a
               href="mailto:support@nathdigitalhub.com"
               className="flex items-center gap-1.5 hover:text-red-600 font-semibold"
             >
-              <Mail className="w-3.5 h-3.5 text-red-600" />
+              <Mail className="w-3.5 h-3.5 text-red-600 shrink-0" />
               <span>support@nathdigitalhub.com</span>
             </a>
           </div>

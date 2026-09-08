@@ -40,41 +40,41 @@ export function PolicyModal({ type, onClose }: PolicyModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="relative bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 md:p-6 animate-in fade-in duration-200">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col">
         
-        {/* Header */}
-        <div className="bg-[#0f141c] text-white p-6 sm:p-7 relative flex items-center justify-between">
+        {/* Header - Pinned at top */}
+        <div className="bg-[#0f141c] text-white p-4 sm:p-6 md:p-7 relative shrink-0 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center">
-              {type === 'faq' && <HelpCircle className="w-5 h-5" />}
-              {type === 'warranty' && <ShieldCheck className="w-5 h-5" />}
-              {type === 'track' && <Package className="w-5 h-5" />}
-              {(type === 'privacy' || type === 'terms') && <FileText className="w-5 h-5" />}
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0">
+              {type === 'faq' && <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5" />}
+              {type === 'warranty' && <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />}
+              {type === 'track' && <Package className="w-4 h-4 sm:w-5 sm:h-5" />}
+              {(type === 'privacy' || type === 'terms') && <FileText className="w-4 h-4 sm:w-5 sm:h-5" />}
             </div>
             <div>
-              <h3 className="text-2xl font-extrabold text-white">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-tight">
                 {type === 'faq' && 'Frequently Asked Questions'}
                 {type === 'warranty' && 'Official Warranty & Returns Policy'}
                 {type === 'track' && 'Track Your Gadget Order'}
                 {type === 'privacy' && 'Privacy Policy'}
                 {type === 'terms' && 'Terms & Conditions'}
               </h3>
-              <p className="text-sm text-slate-400">Nath Communications Customer Assurance</p>
+              <p className="text-xs sm:text-sm text-slate-400">Nath Communications Customer Assurance</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
             aria-label="Close"
-            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer shrink-0 ml-2"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Modal Body */}
-        <div className="p-6 sm:p-7 max-h-[70vh] overflow-y-auto space-y-5">
+        {/* Modal Body - Scrollable */}
+        <div className="p-4 sm:p-6 md:p-7 overflow-y-auto flex-1 overscroll-contain space-y-4 sm:space-y-5">
           {type === 'faq' && (
             <div className="space-y-3">
               {faqs.map((faq, idx) => (

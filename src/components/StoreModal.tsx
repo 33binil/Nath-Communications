@@ -22,8 +22,8 @@ export function StoreModal({ isOpen, onClose }: StoreModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="relative bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 md:p-6 animate-in fade-in duration-200">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col">
         
         {/* Coming Soon Overlay */}
         {showComingSoon && (
@@ -48,27 +48,27 @@ export function StoreModal({ isOpen, onClose }: StoreModalProps) {
           </div>
         )}
         
-        {/* Header */}
-        <div className="bg-[#0f141c] text-white p-6 sm:p-7 relative">
+        {/* Header - Pinned at top */}
+        <div className="bg-[#0f141c] text-white p-4 sm:p-6 md:p-7 relative shrink-0 border-b border-slate-800">
           <button
             onClick={onClose}
             aria-label="Close"
-            className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition-colors cursor-pointer z-10"
           >
             <X className="w-4 h-4" />
           </button>
 
           <Logo variant="dark" size="sm" />
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-4">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-2 sm:mt-3 leading-tight">
             Visit Our Flagship Experience Center
           </h3>
-          <p className="text-slate-400 text-sm sm:text-base mt-1">
+          <p className="text-slate-400 text-xs sm:text-sm mt-1 leading-relaxed max-w-lg">
             Experience live product demos, get instant trade-in valuations, and talk to certified specialists.
           </p>
         </div>
 
-        {/* Content Body */}
-        <div className="p-6 sm:p-7 space-y-6 max-h-[75vh] overflow-y-auto">
+        {/* Content Body - Scrollable */}
+        <div className="p-4 sm:p-6 md:p-7 space-y-5 sm:space-y-6 overflow-y-auto flex-1 overscroll-contain">
           {/* Store Quick Info Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
