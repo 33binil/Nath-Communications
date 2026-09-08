@@ -111,7 +111,7 @@ export function LoadingScreen({
       >
         <div className="relative">
           <img
-            src="/src/assets/images/laptop_isometric_topleft_1788810820061.jpg"
+            src="/loading_laptop.png"
             alt="Laptop"
             className="w-full h-auto object-contain mix-blend-multiply opacity-95 transform -rotate-12 hover:rotate-0 transition-transform duration-700 drop-shadow-2xl"
           />
@@ -133,7 +133,7 @@ export function LoadingScreen({
 
           {/* Smartphone with camera bump & red edge light */}
           <img
-            src="/src/assets/images/iphone_rim_light_right_1788810838261.jpg"
+            src="/loading_mobile.png"
             alt="Smartphone"
             className="w-full h-auto object-contain mix-blend-multiply transform rotate-6 drop-shadow-2xl"
           />
@@ -152,7 +152,7 @@ export function LoadingScreen({
       >
         <div className="relative">
           <img
-            src="/src/assets/images/airpods_red_glow_bottomleft_1788810852579.jpg"
+            src="/loading_airpod.png"
             alt="Earbuds"
             className="w-full h-auto object-contain mix-blend-multiply opacity-90 drop-shadow-xl"
           />
@@ -208,7 +208,7 @@ export function LoadingScreen({
           {/* 3D Folded Ribbon N Logo Image / Vector Composite */}
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
             <img
-              src="/src/assets/images/nath_3d_ribbon_n_1788810803444.jpg"
+              src="/nath_logo.png"
               alt="Nath Digital Hub Logo"
               className="w-full h-full object-contain mix-blend-multiply drop-shadow-[0_12px_24px_rgba(220,38,38,0.25)] hover:scale-105 transition-transform duration-300"
             />
