@@ -109,8 +109,7 @@ export default function App() {
           >
             <LoadingScreen
               onComplete={() => setIsLoadingScreenActive(false)}
-              initialProgress={0}
-              autoPlay={true}
+              duration={2000}
             />
           </motion.div>
         )}

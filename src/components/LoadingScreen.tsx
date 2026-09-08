@@ -1,87 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Play, Pause, RotateCcw, ArrowRight, Eye, Sparkles } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 
 interface LoadingScreenProps {
   onComplete?: () => void;
-  initialProgress?: number;
   autoPlay?: boolean;
-  standalone?: boolean;
+  duration?: number; // duration in milliseconds, defaults to 2000ms (2 seconds)
 }
 
 export function LoadingScreen({
   onComplete,
-  initialProgress = 0,
   autoPlay = true,
-  standalone = false,
+  duration = 2000,
 }: LoadingScreenProps) {
-  const [progress, setProgress] = useState(initialProgress);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
-  const [speed, setSpeed] = useState<'normal' | 'fast' | 'slow'>('normal');
-  const [exact68Mode, setExact68Mode] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('Loading a Smarter Experience...');
-  const [showControls, setShowControls] = useState(false);
-
-  // Status message based on progress
+  // Automatically finish loading after 2 seconds
   useEffect(() => {
-    if (progress < 25) {
-      setStatusMessage('Initializing Smart Tech Catalog...');
-    } else if (progress < 55) {
-      setStatusMessage('Loading High-Performance Devices...');
-    } else if (progress < 85) {
-      setStatusMessage('Loading a Smarter Experience...');
-    } else if (progress < 100) {
-      setStatusMessage('Finalizing Genuine Showroom Experience...');
-    } else {
-      setStatusMessage('Ready! Welcome to Nath Digital Hub.');
-    }
-  }, [progress]);
+    if (!autoPlay || !onComplete) return;
 
-  // Simulation timer
-  useEffect(() => {
-    if (!isPlaying || exact68Mode) return;
-
-    const intervalTime = speed === 'fast' ? 25 : speed === 'slow' ? 70 : 40;
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setIsPlaying(false);
-          if (onComplete && !standalone) {
-            setTimeout(() => {
-              onComplete();
-            }, 600);
-          }
-          return 100;
-        }
-        // Organic realistic increments
-        const step = prev > 60 && prev < 75 ? 0.6 : prev > 85 ? 0.9 : 1.2;
-        return Math.min(100, Math.round((prev + step) * 10) / 10);
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, [isPlaying, exact68Mode, speed, onComplete, standalone]);
-
-  const handleSetExact68 = () => {
-    setExact68Mode(true);
-    setIsPlaying(false);
-    setProgress(68);
-    setStatusMessage('Loading a Smarter Experience...');
-  };
-
-  const handleReplay = () => {
-    setExact68Mode(false);
-    setProgress(0);
-    setIsPlaying(true);
-  };
-
-  const handleSkip = () => {
-    setProgress(100);
-    if (onComplete) {
+    const timer = setTimeout(() => {
       onComplete();
-    }
-  };
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [autoPlay, duration, onComplete]);
 
   return (
     <div
@@ -100,61 +41,60 @@ export function LoadingScreen({
         <div className="absolute bottom-[5%] left-[5%] w-[260px] h-[260px] rounded-full bg-gradient-to-tr from-red-100/40 via-rose-50/20 to-transparent filter blur-xl opacity-80" />
       </div>
 
-      {/* ================= 3D PERIMETER HARDWARE VISUALS ================= */}
+      {/* ================= 3D PERIMETER HARDWARE VISUALS (CORNER BLEED / FLOW OUTSIDE SCREEN) ================= */}
       
-      {/* 1. TOP-LEFT: Open Laptop in Isometric Perspective */}
+      {/* 1. TOP-LEFT CORNER: Open Laptop flowing outside the top-left boundary */}
       <motion.div
-        initial={{ opacity: 0, x: -40, y: -20 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
+        initial={{ opacity: 0, x: -60, y: -40, rotate: -15 }}
+        animate={{ opacity: 1, x: 0, y: 0, rotate: -8 }}
         transition={{ duration: 1, ease: 'easeOut' }}
-        className="absolute -top-6 -left-10 sm:-top-8 sm:-left-6 md:top-2 md:left-2 lg:top-4 lg:left-4 z-10 pointer-events-none w-48 sm:w-64 md:w-80 lg:w-[400px] max-w-none"
+        className="absolute -top-10 -left-12 sm:-top-16 sm:-left-18 md:-top-20 md:-left-24 lg:-top-28 lg:-left-32 xl:-top-32 xl:-left-36 z-10 pointer-events-none w-56 sm:w-72 md:w-96 lg:w-[480px] xl:w-[560px] max-w-none select-none"
       >
         <div className="relative">
+          {/* Subtle studio under-glow */}
+          <div className="absolute inset-0 bg-slate-300/30 rounded-full filter blur-2xl -z-10 scale-90" />
           <img
             src="/loading_laptop.png"
             alt="Laptop"
-            className="w-full h-auto object-contain mix-blend-multiply opacity-95 transform -rotate-12 hover:rotate-0 transition-transform duration-700 drop-shadow-2xl"
+            className="w-full h-auto object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.18)] transition-transform duration-700 hover:scale-105"
           />
-          {/* Subtle reflection overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent pointer-events-none" />
         </div>
       </motion.div>
 
-      {/* 2. RIGHT: Giant Flagship Smartphone with Neon Red Rim-light */}
+      {/* 2. RIGHT / TOP-RIGHT CORNER: Flagship Smartphone flowing outside the right boundary */}
       <motion.div
-        initial={{ opacity: 0, x: 60, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
+        initial={{ opacity: 0, x: 70, scale: 0.95, rotate: 10 }}
+        animate={{ opacity: 1, x: 0, scale: 1, rotate: 6 }}
         transition={{ duration: 1.1, ease: 'easeOut', delay: 0.1 }}
-        className="absolute top-1/2 -translate-y-1/2 -right-8 sm:-right-12 md:-right-16 lg:right-0 z-10 pointer-events-none w-64 sm:w-80 md:w-96 lg:w-[480px] xl:w-[540px]"
+        className="absolute top-1/2 -translate-y-1/2 -right-14 sm:-right-20 md:-right-28 lg:-right-36 xl:-right-44 z-10 pointer-events-none w-56 sm:w-80 md:w-96 lg:w-[500px] xl:w-[580px] max-w-none select-none"
       >
-        <div className="relative flex items-center justify-end">
-          {/* Circular gradient backdrop disc behind phone */}
-          <div className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 w-56 h-56 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full bg-gradient-to-br from-rose-200/70 via-red-100/40 to-white/10 shadow-[inset_0_0_40px_rgba(239,68,68,0.15)] -z-10" />
+        <div className="relative flex items-center justify-center">
+          {/* Centered circular ambient backdrop glow disc */}
+          <div className="absolute w-56 h-56 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] rounded-full bg-gradient-to-br from-rose-200/50 via-red-100/30 to-transparent filter blur-3xl -z-10" />
 
-          {/* Smartphone with camera bump & red edge light */}
+          {/* Smartphone device */}
           <img
             src="/loading_mobile.png"
             alt="Smartphone"
-            className="w-full h-auto object-contain mix-blend-multiply transform rotate-6 drop-shadow-2xl"
+            className="w-full h-auto object-contain drop-shadow-[0_28px_56px_rgba(0,0,0,0.20)]"
           />
-          
-          {/* Crimson glow line accent simulation */}
-          <div className="absolute left-[28%] top-[25%] bottom-[20%] w-[3px] bg-red-500/80 filter blur-[2px] rounded-full transform rotate-6 opacity-75 animate-pulse-subtle" />
         </div>
       </motion.div>
 
-      {/* 3. BOTTOM-LEFT: Sleek Earbuds with Red Glow */}
+      {/* 3. BOTTOM-LEFT CORNER: Sleek Earbuds flowing outside the bottom-left boundary */}
       <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-        className="absolute -bottom-8 -left-6 sm:-bottom-10 sm:-left-4 md:bottom-2 md:left-6 lg:bottom-4 lg:left-10 z-10 pointer-events-none w-36 sm:w-48 md:w-60 lg:w-72"
+        initial={{ opacity: 0, x: -40, y: 50, scale: 0.9 }}
+        animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: -4 }}
+        transition={{ duration: 1, ease: 'easeOut', delay: 0.15 }}
+        className="absolute -bottom-10 -left-10 sm:-bottom-14 sm:-left-14 md:-bottom-18 md:-left-18 lg:-bottom-24 lg:-left-24 z-10 pointer-events-none w-40 sm:w-56 md:w-72 lg:w-84 xl:w-96 max-w-none select-none"
       >
         <div className="relative">
+          {/* Subtle crimson under-glow */}
+          <div className="absolute inset-0 bg-red-400/20 rounded-full filter blur-xl -z-10 scale-90" />
           <img
             src="/loading_airpod.png"
             alt="Earbuds"
-            className="w-full h-auto object-contain mix-blend-multiply opacity-90 drop-shadow-xl"
+            className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.16)]"
           />
         </div>
       </motion.div>
@@ -193,24 +133,24 @@ export function LoadingScreen({
         </motion.div>
       </header>
 
-      {/* ================= CENTER BRANDING & INTERACTIVE LOADER ================= */}
+      {/* ================= CENTER BRANDING & ROUNDING SPINNER LOADER ================= */}
       <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-12 my-auto max-w-4xl mx-auto w-full">
-        {/* 3D Ribbon 'N' Logo */}
+        {/* Brand Logo */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 15 }}
+          initial={{ opacity: 0, scale: 0.88, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative mb-4 sm:mb-6"
+          className="relative mb-3 sm:mb-5 flex flex-col items-center justify-center"
         >
           {/* Subtle back illumination glow */}
-          <div className="absolute inset-0 bg-red-500/20 rounded-full filter blur-xl scale-125 pointer-events-none" />
+          <div className="absolute inset-0 bg-red-500/15 rounded-full filter blur-xl scale-125 pointer-events-none" />
 
-          {/* 3D Folded Ribbon N Logo Image / Vector Composite */}
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+          {/* Nath Logo Image */}
+          <div className="relative flex items-center justify-center px-2">
             <img
               src="/nath_logo.png"
               alt="Nath Digital Hub Logo"
-              className="w-full h-full object-contain mix-blend-multiply drop-shadow-[0_12px_24px_rgba(220,38,38,0.25)] hover:scale-105 transition-transform duration-300"
+              className="h-14 sm:h-18 md:h-20 w-auto max-w-[260px] sm:max-w-xs md:max-w-sm object-contain drop-shadow-[0_8px_20px_rgba(220,38,38,0.20)] hover:scale-105 transition-transform duration-300"
             />
           </div>
         </motion.div>
@@ -220,7 +160,7 @@ export function LoadingScreen({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-center space-y-2 mb-6 sm:mb-8"
+          className="text-center space-y-2 mb-8 sm:mb-10"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 font-['Outfit',sans-serif]">
             Nath Digital Hub
@@ -230,156 +170,73 @@ export function LoadingScreen({
           </p>
         </motion.div>
 
-        {/* Progress Bar & Percentage Readout */}
+        {/* Modern Rounding / Circular Spinner Loader */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="w-full max-w-md sm:max-w-lg px-4 flex flex-col items-center"
+          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="flex flex-col items-center justify-center gap-5"
         >
-          <div className="w-full flex items-center gap-4">
-            {/* The Pill Track */}
-            <div className="relative flex-1 h-3 sm:h-3.5 bg-slate-200/80 rounded-full overflow-visible shadow-[inset_0_1px_3px_rgba(0,0,0,0.08)]">
-              {/* The Active Filled Bar */}
-              <motion.div
-                className="h-full rounded-full bg-gradient-to-r from-red-500 via-red-600 to-rose-600 relative"
-                style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
-                transition={{ ease: 'easeOut', duration: 0.2 }}
-              >
-                {/* Glowing bead / thumb indicator at the active edge */}
-                {progress > 1 && (
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                    <div className="relative w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white border-2 border-red-500 shadow-[0_0_14px_rgba(239,68,68,0.9),0_0_28px_rgba(239,68,68,0.6)] flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping" />
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            </div>
+          {/* Circular Rounding Spinner */}
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
+            {/* Ambient subtle background glow */}
+            <div className="absolute inset-0 rounded-full bg-red-500/15 filter blur-md animate-pulse" />
 
-            {/* Percentage Number Text (e.g., 68%) */}
-            <span className="text-sm sm:text-base font-bold text-slate-600 tracking-tight min-w-[42px] text-left">
-              {Math.round(progress)}%
-            </span>
+            {/* Static subtle background track ring */}
+            <div className="absolute inset-0 rounded-full border-3 border-slate-200/80" />
+
+            {/* Rotating smooth glowing accent spinner ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
+              className="absolute inset-0 rounded-full border-3 border-transparent border-t-red-600 border-r-rose-500"
+            />
+
+            {/* Inner secondary counter-rotating subtle orbit */}
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: 'linear' }}
+              className="absolute inset-1.5 rounded-full border-2 border-transparent border-b-red-400/70 border-l-rose-300/40"
+            />
+
+            {/* Center glowing core dot */}
+            <motion.div
+              animate={{ scale: [0.85, 1.15, 0.85], opacity: [0.7, 1, 0.7] }}
+              transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-600 shadow-[0_0_10px_rgba(239,68,68,0.8)]"
+            />
           </div>
 
-          {/* Loading Subtitle text */}
-          <p className="mt-4 text-xs sm:text-sm font-medium tracking-[0.22em] text-slate-500 uppercase text-center transition-all duration-300">
-            {statusMessage}
-          </p>
+          {/* Clean Loading Subtitle with animated pulsing dots */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs sm:text-sm font-semibold tracking-[0.24em] text-slate-600 uppercase">
+              Loading a Smarter Experience
+            </span>
+            <span className="flex gap-1 items-center pb-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-bounce [animation-delay:-0.3s]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-bounce [animation-delay:-0.15s]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-bounce" />
+            </span>
+          </div>
         </motion.div>
 
-        {/* Interactive Testing Controls (Discreetly expandible / toggled) */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <button
-            onClick={() => setShowControls(!showControls)}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer border border-slate-200/60 shadow-xs"
-            title="Toggle interactive controls to test loading states"
+        {/* Quick Skip button if user wants to enter immediately */}
+        {onComplete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-6"
           >
-            <Sparkles className="w-3.5 h-3.5 text-red-500" />
-            <span>{showControls ? 'Hide Controls' : 'Interactive Controls'}</span>
-          </button>
-
-          {onComplete && !standalone && (
             <button
-              onClick={handleSkip}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-slate-900 hover:bg-black text-white transition-all shadow-xs hover:shadow-md cursor-pointer"
+              onClick={onComplete}
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 hover:bg-black text-white transition-all shadow-xs hover:shadow-md cursor-pointer hover:scale-105"
             >
               <span>Enter Showroom</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
-          )}
-        </div>
-
-        {/* Expandable Control Panel */}
-        <AnimatePresence>
-          {showControls && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-3 p-3 sm:p-4 bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs"
-            >
-              {/* Exact 68% button (Matches the screenshot) */}
-              <button
-                onClick={handleSetExact68}
-                className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
-                  exact68Mode
-                    ? 'bg-red-600 text-white shadow-sm'
-                    : 'bg-red-50 text-red-600 hover:bg-red-100 border border-red-200'
-                }`}
-              >
-                Exact UI (68%)
-              </button>
-
-              {/* Play / Pause */}
-              <button
-                onClick={() => {
-                  setExact68Mode(false);
-                  setIsPlaying(!isPlaying);
-                }}
-                className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                <span>{isPlaying ? 'Pause' : 'Resume'}</span>
-              </button>
-
-              {/* Replay 0% -> 100% */}
-              <button
-                onClick={handleReplay}
-                className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Replay (0%)</span>
-              </button>
-
-              {/* Speed Toggles */}
-              <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200">
-                <button
-                  onClick={() => setSpeed('slow')}
-                  className={`px-2 py-1 rounded text-[11px] font-semibold cursor-pointer ${
-                    speed === 'slow' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
-                  }`}
-                >
-                  Slow
-                </button>
-                <button
-                  onClick={() => setSpeed('normal')}
-                  className={`px-2 py-1 rounded text-[11px] font-semibold cursor-pointer ${
-                    speed === 'normal' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
-                  }`}
-                >
-                  Normal
-                </button>
-                <button
-                  onClick={() => setSpeed('fast')}
-                  className={`px-2 py-1 rounded text-[11px] font-semibold cursor-pointer ${
-                    speed === 'fast' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
-                  }`}
-                >
-                  Fast
-                </button>
-              </div>
-
-              {/* Scrub Slider */}
-              <div className="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0 px-2">
-                <span className="text-[11px] text-slate-500 font-medium">Scrub:</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={progress}
-                  onChange={(e) => {
-                    setExact68Mode(false);
-                    setIsPlaying(false);
-                    setProgress(Number(e.target.value));
-                  }}
-                  className="w-24 sm:w-32 accent-red-600 cursor-pointer"
-                />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </motion.div>
+        )}
       </div>
 
       {/* ================= 4 PILLARS & BOTTOM FOOTER ================= */}
@@ -394,7 +251,6 @@ export function LoadingScreen({
           {/* Pillar 1: Trusted Products */}
           <div className="flex flex-col items-center text-center p-3 sm:p-2 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 flex items-center justify-center text-red-600 group-hover:scale-110 transition-transform duration-300">
-              {/* Dual-tone shield with check icon */}
               <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" stroke="currentColor">
                 <path
                   d="M16 3L6 7.5V14.5C6 21 10.3 27 16 29C21.7 27 26 21 26 14.5V7.5L16 3Z"
@@ -420,11 +276,8 @@ export function LoadingScreen({
           {/* Pillar 2: Fast & Reliable Support */}
           <div className="flex flex-col items-center text-center p-3 sm:p-2 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              {/* Delivery truck with speed streaks */}
               <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
-                {/* Red speed lines */}
                 <path d="M4 11H8M2 15H6M3 19H7" stroke="#ef4444" strokeWidth="2.2" strokeLinecap="round" />
-                {/* Truck body */}
                 <path
                   d="M9 9H20V21H9V9Z"
                   stroke="#ef4444"
@@ -432,7 +285,6 @@ export function LoadingScreen({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Cabin */}
                 <path
                   d="M20 13H24.5L28 17V21H20V13Z"
                   stroke="#0f172a"
@@ -440,7 +292,6 @@ export function LoadingScreen({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Wheels */}
                 <circle cx="13" cy="22" r="2.5" fill="white" stroke="#0f172a" strokeWidth="2" />
                 <circle cx="24" cy="22" r="2.5" fill="white" stroke="#ef4444" strokeWidth="2" />
               </svg>
@@ -453,15 +304,11 @@ export function LoadingScreen({
           {/* Pillar 3: Customer Focused */}
           <div className="flex flex-col items-center text-center p-3 sm:p-2 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              {/* 3 Users group icon */}
               <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
-                {/* Left person */}
                 <circle cx="8" cy="13" r="3" stroke="#0f172a" strokeWidth="2" />
                 <path d="M4 22C4 19 6 17 9 17" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" />
-                {/* Right person */}
                 <circle cx="24" cy="13" r="3" stroke="#0f172a" strokeWidth="2" />
                 <path d="M28 22C28 19 26 17 23 17" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" />
-                {/* Center VIP red person */}
                 <circle cx="16" cy="11" r="3.5" stroke="#ef4444" strokeWidth="2.2" />
                 <path
                   d="M10 22C10 18.5 12.5 16 16 16C19.5 16 22 18.5 22 22"
@@ -479,9 +326,7 @@ export function LoadingScreen({
           {/* Pillar 4: Smarter Solutions */}
           <div className="flex flex-col items-center text-center p-3 sm:p-2 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 mb-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              {/* Gear with center tech star */}
               <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
-                {/* Gear cog */}
                 <path
                   d="M16 5V8M16 24V27M5 16H8M24 16H27M8.2 8.2L10.4 10.4M21.6 21.6L23.8 23.8M8.2 23.8L10.4 21.6M21.6 10.4L23.8 8.2"
                   stroke="#0f172a"
@@ -489,7 +334,6 @@ export function LoadingScreen({
                   strokeLinecap="round"
                 />
                 <circle cx="16" cy="16" r="7" stroke="#0f172a" strokeWidth="2" />
-                {/* Red star center */}
                 <path
                   d="M16 12L17.2 14.8L20 16L17.2 17.2L16 20L14.8 17.2L12 16L14.8 14.8L16 12Z"
                   fill="#ef4444"
