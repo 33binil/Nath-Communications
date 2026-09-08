@@ -105,7 +105,7 @@ export default function App() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.99, filter: 'blur(4px)' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="fixed inset-0 z-50 overflow-y-auto bg-[#fcfcfd]"
+            className="fixed inset-0 z-50 overflow-hidden bg-[#fcfcfd]"
           >
             <LoadingScreen
               onComplete={() => setIsLoadingScreenActive(false)}
