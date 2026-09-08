@@ -158,7 +158,7 @@ export function LoadingScreen({
           className="text-center space-y-1 mb-4 sm:mb-6 md:mb-8 shrink-0"
         >
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 font-['Outfit',sans-serif]">
-            Nath Digital Hub
+            Nath Communications
           </h1>
           <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.24em] sm:tracking-[0.32em] text-slate-500 uppercase">
             Tech for a Better Tomorrow
