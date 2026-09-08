@@ -37,18 +37,21 @@ export function LoadingScreen({
         {/* Soft red/coral ambient backlight behind the right-hand phone */}
         <div className="absolute top-[10%] -right-[5%] w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-bl from-rose-200/50 via-red-100/35 to-transparent filter blur-2xl opacity-90" />
         
-        {/* Soft bottom-left red glow for earbuds */}
-        <div className="absolute bottom-[5%] left-[5%] w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] rounded-full bg-gradient-to-tr from-red-100/40 via-rose-50/20 to-transparent filter blur-xl opacity-80" />
+        {/* Soft top-left ambient glow for laptop */}
+        <div className="absolute top-[12%] left-[2%] w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] rounded-full bg-gradient-to-br from-slate-200/40 via-red-50/20 to-transparent filter blur-2xl opacity-70" />
+        
+        {/* Soft lower-left red glow for earbuds */}
+        <div className="absolute bottom-[20%] left-[2%] w-[160px] h-[160px] sm:w-[220px] sm:h-[220px] rounded-full bg-gradient-to-tr from-red-100/40 via-rose-50/20 to-transparent filter blur-xl opacity-80" />
       </div>
 
       {/* ================= 3D PERIMETER HARDWARE VISUALS (CORNER BLEED / OVERFLOW-SAFE) ================= */}
       
-      {/* 1. TOP-LEFT CORNER: Laptop flowing outside the top-left boundary */}
+      {/* 1. UPPER-LEFT FLANK: Laptop positioned safely BELOW top header text */}
       <motion.div
-        initial={{ opacity: 0, x: -40, y: -30, rotate: -12 }}
+        initial={{ opacity: 0, x: -40, y: -20, rotate: -12 }}
         animate={{ opacity: 1, x: 0, y: 0, rotate: -8 }}
         transition={{ duration: 0.9, ease: 'easeOut' }}
-        className="absolute -top-8 -left-10 sm:-top-16 sm:-left-18 md:-top-24 md:-left-28 lg:-top-32 lg:-left-36 xl:-top-36 xl:-left-40 z-10 pointer-events-none w-48 sm:w-68 md:w-96 lg:w-[540px] xl:w-[620px] max-w-none select-none opacity-45 sm:opacity-90 lg:opacity-100"
+        className="absolute top-14 -left-10 sm:top-14 sm:-left-14 md:top-10 md:-left-20 lg:top-8 lg:-left-24 xl:top-6 xl:-left-28 z-10 pointer-events-none w-40 sm:w-56 md:w-76 lg:w-[460px] xl:w-[520px] max-w-none select-none opacity-50 sm:opacity-90 lg:opacity-100"
       >
         <div className="relative">
           <div className="absolute inset-0 bg-slate-300/30 rounded-full filter blur-2xl -z-10 scale-90" />
@@ -60,15 +63,15 @@ export function LoadingScreen({
         </div>
       </motion.div>
 
-      {/* 2. RIGHT CORNER: Smartphone flowing outside the right boundary */}
+      {/* 2. RIGHT FLANK: Smartphone vertically centered between header and footer */}
       <motion.div
         initial={{ opacity: 0, x: 50, scale: 0.95, rotate: 10 }}
         animate={{ opacity: 1, x: 0, scale: 1, rotate: 6 }}
         transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
-        className="absolute top-1/2 -translate-y-1/2 -right-14 sm:-right-20 md:-right-28 lg:-right-36 xl:-right-44 z-10 pointer-events-none w-48 sm:w-72 md:w-96 lg:w-[520px] xl:w-[600px] max-w-none select-none opacity-45 sm:opacity-90 lg:opacity-100"
+        className="absolute top-1/2 -translate-y-1/2 -right-12 sm:-right-16 md:-right-24 lg:-right-32 xl:-right-40 z-10 pointer-events-none w-44 sm:w-64 md:w-84 lg:w-[480px] xl:w-[540px] max-w-none select-none opacity-50 sm:opacity-90 lg:opacity-100"
       >
         <div className="relative flex items-center justify-center">
-          <div className="absolute w-48 h-48 sm:w-80 sm:h-80 lg:w-[480px] lg:h-[480px] rounded-full bg-gradient-to-br from-rose-200/50 via-red-100/30 to-transparent filter blur-3xl -z-10" />
+          <div className="absolute w-44 h-44 sm:w-72 sm:h-72 lg:w-[440px] lg:h-[440px] rounded-full bg-gradient-to-br from-rose-200/50 via-red-100/30 to-transparent filter blur-3xl -z-10" />
           <img
             src="/loading_mobile.png"
             alt="Smartphone"
@@ -77,12 +80,12 @@ export function LoadingScreen({
         </div>
       </motion.div>
 
-      {/* 3. BOTTOM-LEFT CORNER: Earbuds flowing outside the bottom-left boundary */}
+      {/* 3. LOWER-LEFT FLANK: Earbuds positioned safely ABOVE the 4 bottom pillars & footer */}
       <motion.div
-        initial={{ opacity: 0, x: -30, y: 30, scale: 0.9 }}
+        initial={{ opacity: 0, x: -30, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: -4 }}
         transition={{ duration: 0.9, ease: 'easeOut', delay: 0.15 }}
-        className="absolute -bottom-8 -left-8 sm:-bottom-14 sm:-left-14 md:-bottom-20 md:-left-20 lg:-bottom-28 lg:-left-28 z-10 pointer-events-none w-36 sm:w-52 md:w-72 lg:w-88 xl:w-[420px] max-w-none select-none opacity-45 sm:opacity-90 lg:opacity-100"
+        className="absolute bottom-28 -left-8 sm:bottom-32 sm:-left-12 md:bottom-28 md:-left-16 lg:bottom-28 lg:-left-20 z-10 pointer-events-none w-32 sm:w-48 md:w-64 lg:w-80 xl:w-[380px] max-w-none select-none opacity-50 sm:opacity-90 lg:opacity-100"
       >
         <div className="relative">
           <div className="absolute inset-0 bg-red-400/20 rounded-full filter blur-xl -z-10 scale-90" />
@@ -95,7 +98,7 @@ export function LoadingScreen({
       </motion.div>
 
       {/* ================= TOP HEADER STRIP ================= */}
-      <header className="relative z-20 w-full px-2 sm:px-6 md:px-8 pt-1 sm:pt-2 flex items-start justify-between shrink-0">
+      <header className="relative z-30 w-full px-3 sm:px-6 md:px-8 pt-2 sm:pt-3 flex items-start justify-between shrink-0">
         {/* Top-Left: Genuine Products */}
         <motion.div
           initial={{ opacity: 0, y: -8 }}
@@ -104,7 +107,7 @@ export function LoadingScreen({
           className="flex items-center gap-2 sm:gap-3"
         >
           <span className="w-3.5 sm:w-5 md:w-6 h-[2.5px] sm:h-[3px] bg-red-600 rounded-full inline-block shrink-0 shadow-sm shadow-red-500/40" />
-          <span className="text-[9px] sm:text-[11px] md:text-xs font-bold tracking-[0.18em] sm:tracking-[0.22em] text-slate-800 uppercase">
+          <span className="text-[10px] sm:text-[11px] md:text-xs font-extrabold tracking-[0.18em] sm:tracking-[0.22em] text-slate-900 uppercase">
             Genuine Products
           </span>
         </motion.div>
@@ -117,7 +120,7 @@ export function LoadingScreen({
           className="flex items-center gap-2 sm:gap-3 text-right"
         >
           <div className="flex flex-col text-right">
-            <span className="text-[9px] sm:text-[11px] md:text-xs font-bold tracking-[0.18em] sm:tracking-[0.22em] text-slate-800 uppercase">
+            <span className="text-[10px] sm:text-[11px] md:text-xs font-extrabold tracking-[0.18em] sm:tracking-[0.22em] text-slate-900 uppercase">
               A Brighter Tomorrow
             </span>
           </div>
@@ -232,7 +235,7 @@ export function LoadingScreen({
       </div>
 
       {/* ================= 4 PILLARS & BOTTOM FOOTER ================= */}
-      <div className="relative z-20 w-full px-2 sm:px-6 md:px-8 pb-1 sm:pb-3 flex flex-col gap-2 sm:gap-4 shrink-0">
+      <div className="relative z-30 w-full px-3 sm:px-6 md:px-8 pb-2 sm:pb-3 flex flex-col gap-2 sm:gap-4 shrink-0">
         {/* 4 Feature Columns in a single responsive horizontal grid */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -347,7 +350,7 @@ export function LoadingScreen({
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col items-start"
           >
-            <div className="flex flex-col space-y-0.5 text-[8px] sm:text-[10px] md:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.25em] text-slate-800 uppercase leading-tight">
+            <div className="flex flex-col space-y-0.5 text-[9px] sm:text-[10px] md:text-[11px] font-extrabold tracking-[0.18em] sm:tracking-[0.25em] text-slate-900 uppercase leading-tight">
               <span>Devices • People • Possibilities</span>
             </div>
             <span className="w-4 sm:w-6 h-[2px] sm:h-[3px] bg-red-600 rounded-full inline-block mt-1 shadow-sm shadow-red-500/40" />
@@ -360,7 +363,7 @@ export function LoadingScreen({
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col items-end text-right"
           >
-            <span className="text-[8px] sm:text-[10px] md:text-[11px] font-bold tracking-[0.2em] sm:tracking-[0.25em] text-slate-800 uppercase">
+            <span className="text-[9px] sm:text-[10px] md:text-[11px] font-extrabold tracking-[0.18em] sm:tracking-[0.25em] text-slate-900 uppercase">
               Nath Digital Hub
             </span>
             <span className="w-4 sm:w-6 h-[2px] sm:h-[3px] bg-red-600 rounded-full inline-block mt-1 shadow-sm shadow-red-500/40" />
