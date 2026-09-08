@@ -24,10 +24,27 @@ export function LoadingScreen({
     return () => clearTimeout(timer);
   }, [autoPlay, duration, onComplete]);
 
+  // Prevent any wheel or touchmove scrolling while loading screen is rendered
+  useEffect(() => {
+    const preventScroll = (e: TouchEvent | WheelEvent) => {
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('wheel', preventScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
+    };
+  }, []);
+
   return (
     <div
       id="loading-screen-container"
-      className="relative w-full h-[100dvh] max-h-[100dvh] bg-[#fcfcfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans p-2.5 sm:p-4 md:p-6 lg:p-8"
+      className="relative w-full h-[100dvh] max-h-[100dvh] bg-[#fcfcfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans p-2.5 sm:p-4 md:p-6 lg:p-8 touch-none overscroll-none"
     >
       {/* Subtle Studio Lighting and Atmosphere */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

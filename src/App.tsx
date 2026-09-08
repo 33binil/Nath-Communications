@@ -37,6 +37,25 @@ export default function App() {
     setActiveSection('home');
   }, []);
 
+  // Prevent any document, body, or mobile bounce scrolling while LoadingScreen is active
+  useEffect(() => {
+    if (isLoadingScreenActive) {
+      const prevBodyOverflow = document.body.style.overflow;
+      const prevHtmlOverflow = document.documentElement.style.overflow;
+      const prevTouchAction = document.body.style.touchAction;
+
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+
+      return () => {
+        document.body.style.overflow = prevBodyOverflow;
+        document.documentElement.style.overflow = prevHtmlOverflow;
+        document.body.style.touchAction = prevTouchAction;
+      };
+    }
+  }, [isLoadingScreenActive]);
+
   const handleSelectQuickCategory = (slug: string) => {
     setSelectedCategorySlug(slug);
     if (slug === 'all') {
@@ -83,7 +102,7 @@ export default function App() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.99, filter: 'blur(4px)' }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="fixed inset-0 z-50 overflow-hidden bg-[#fcfcfd]"
+            className="fixed inset-0 z-50 overflow-hidden bg-[#fcfcfd] touch-none overscroll-none select-none"
           >
             <LoadingScreen
               onComplete={() => setIsLoadingScreenActive(false)}
