@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageCircle, MapPin, X, Sparkles } from 'lucide-react';
+import { MessageCircle, MapPin, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -122,7 +122,6 @@ export default function App() {
           setIsContactModalOpen(true);
         }}
         onComingSoon={() => setIsComingSoonOpen(true)}
-        onOpenLoadingPage={() => setIsLoadingScreenActive(true)}
       />
 
       <main className="flex-grow">
@@ -182,17 +181,8 @@ export default function App() {
         onComingSoon={() => setIsComingSoonOpen(true)}
       />
 
-      {/* Floating Quick Action Widget for WhatsApp, Showroom & Loading Page */}
+      {/* Floating Quick Action Widget for WhatsApp & Showroom */}
       <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-auto">
-        <button
-          onClick={() => setIsLoadingScreenActive(true)}
-          className="inline-flex items-center gap-2 bg-white/95 hover:bg-white text-slate-800 text-xs font-bold py-2 px-3.5 rounded-full shadow-lg backdrop-blur-md border border-slate-200 transition-all hover:scale-105 cursor-pointer"
-          title="Preview Loading Screen UI"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-red-600" />
-          <span>Loading Screen UI</span>
-        </button>
-
         <button
           onClick={() => setIsStoreModalOpen(true)}
           className="hidden sm:inline-flex items-center gap-2 bg-slate-900/90 hover:bg-black text-white text-sm font-bold py-2.5 px-4 rounded-full shadow-lg backdrop-blur-md border border-slate-700 transition-all hover:scale-105 cursor-pointer"

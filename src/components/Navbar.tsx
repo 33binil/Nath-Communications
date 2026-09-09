@@ -7,7 +7,6 @@ interface NavbarProps {
   onOpenStoreModal: () => void;
   onOpenContactModal: () => void;
   onComingSoon: () => void;
-  onOpenLoadingPage?: () => void;
   activeSection: string;
 }
 
@@ -16,7 +15,6 @@ export function Navbar({
   onOpenStoreModal,
   onOpenContactModal,
   onComingSoon,
-  onOpenLoadingPage,
   activeSection,
 }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -96,19 +94,6 @@ export function Navbar({
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Loading Page Preview Button */}
-            {onOpenLoadingPage && (
-              <button
-                id="navbar-loading-preview-btn"
-                onClick={onOpenLoadingPage}
-                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200/80 rounded-full transition-colors cursor-pointer"
-                title="View original Loading Page UI"
-              >
-                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-                <span>Loading Screen UI</span>
-              </button>
-            )}
-
             {/* Search Icon Button */}
             <button
               id="navbar-search-btn"
@@ -187,19 +172,6 @@ export function Navbar({
               <span>Visit Showroom & Store</span>
               <ArrowRight className="w-4 h-4" />
             </button>
-
-            {onOpenLoadingPage && (
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenLoadingPage();
-                }}
-                className="w-full inline-flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-700 text-lg font-semibold py-2.5 px-4 rounded-xl border border-red-200 cursor-pointer"
-              >
-                <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
-                <span>View Loading Screen UI</span>
-              </button>
-            )}
 
             <button
               onClick={() => {
