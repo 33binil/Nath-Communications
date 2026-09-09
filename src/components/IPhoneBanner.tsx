@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface IPhoneBannerProps {
   onExploreIPhone: () => void;
@@ -6,26 +7,43 @@ interface IPhoneBannerProps {
 
 export function IPhoneBanner({ onExploreIPhone }: IPhoneBannerProps) {
   return (
-    <section className="py-6 sm:py-8 bg-white">
+    <section className="py-6 sm:py-8 bg-white overflow-hidden">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-[#090b10] overflow-hidden text-white shadow-xl border border-slate-900">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="relative rounded-3xl bg-[#090b10] overflow-hidden text-white shadow-xl border border-slate-900"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 lg:p-12">
             
-            {/* Left: iPhone 16 Titanium Visual */}
-            <div className="lg:col-span-4 flex justify-center lg:justify-start">
+            {/* Left: iPhone Visual */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="lg:col-span-4 flex justify-center lg:justify-start"
+            >
               <div className="relative group max-w-[280px] sm:max-w-[320px]">
                 <img
                   src="/Apple_iPhone_17_Pro-max.png"
                   alt="iPhone 16 Pro"
-                  className="rounded-2xl object-cover aspect-[4/3] sm:aspect-square w-full h-auto shadow-2xl group-hover:scale-102 transition-transform duration-500"
+                  className="rounded-2xl object-cover aspect-[4/3] sm:aspect-square w-full h-auto shadow-2xl group-hover:scale-103 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                 />
               </div>
-            </div>
+            </motion.div>
 
             {/* Middle: Headline & CTA */}
-            <div className="lg:col-span-5 space-y-3.5 text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="lg:col-span-5 space-y-3.5 text-center lg:text-left"
+            >
               <div className="inline-flex items-center gap-2 text-sm sm:text-base font-bold tracking-[0.16em] text-red-500 uppercase">
                 <span className="w-4 h-[2px] bg-red-500 rounded-full" />
                 <span>LATEST ARRIVALS</span>
@@ -40,21 +58,29 @@ export function IPhoneBanner({ onExploreIPhone }: IPhoneBannerProps) {
               </p>
 
               <div className="pt-2">
-                <button
+                <motion.button
                   id="banner-iphone-explore-btn"
                   onClick={onExploreIPhone}
-                  className="inline-flex items-center gap-2.5 bg-white hover:bg-slate-100 text-slate-950 font-semibold px-5 py-2.5 rounded-full text-base sm:text-lg transition-all duration-200 shadow-md cursor-pointer group"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 bg-white hover:bg-slate-100 text-slate-950 font-semibold px-5 py-2.5 rounded-full text-base sm:text-lg transition-colors duration-200 shadow-md cursor-pointer group"
                 >
                   <span>Explore Now</span>
                   <span className="w-4 h-4 rounded-full bg-slate-950 text-white flex items-center justify-center">
                     <ArrowRight className="w-2.5 h-2.5 group-hover:translate-x-0.5 transition-transform" />
                   </span>
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: 3 Value points matching screenshot */}
-            <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-center space-y-3 text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-6 lg:pt-0 lg:pl-8 flex flex-col justify-center space-y-3 text-center lg:text-left"
+            >
               <div className="text-lg sm:text-xl font-semibold text-slate-200">
                 Bigger Possibilities
               </div>
@@ -64,10 +90,10 @@ export function IPhoneBanner({ onExploreIPhone }: IPhoneBannerProps) {
               <div className="text-lg sm:text-xl font-semibold text-slate-200">
                 Stunning Design
               </div>
-            </div>
+            </motion.div>
 
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

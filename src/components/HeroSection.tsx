@@ -1,15 +1,20 @@
-import { ArrowRight, ShieldCheck, UserCheck, HeartHandshake, Star } from 'lucide-react';
+import { ArrowRight, ShieldCheck, UserCheck, HeartHandshake } from 'lucide-react';
+import { motion } from 'motion/react';
+import type { Key } from 'react';
 
 interface HeroSectionProps {
   onExploreClick: () => void;
   onLearnMoreClick: () => void;
   onOpenStoreModal: () => void;
+  isReady?: boolean;
+  key?: Key;
 }
 
 export function HeroSection({
   onExploreClick,
   onLearnMoreClick,
   onOpenStoreModal,
+  isReady = true,
 }: HeroSectionProps) {
   return (
     <section id="home" className="relative pt-24 pb-10 sm:pt-28 sm:pb-14 lg:pt-32 lg:pb-16 bg-white overflow-hidden">
@@ -17,54 +22,88 @@ export function HeroSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Hero Copy & CTA */}
-          <div className="lg:col-span-6 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isReady ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="lg:col-span-6 space-y-6"
+          >
             
             {/* Eyebrow with red dash */}
-            <div className="flex items-center gap-2.5 text-sm sm:text-base font-bold tracking-[0.18em] text-slate-600 uppercase">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, delay: isReady ? 0.1 : 0 }}
+              className="flex items-center gap-2.5 text-sm sm:text-base font-bold tracking-[0.18em] text-slate-600 uppercase"
+            >
               <span className="w-5 h-[2px] bg-[#E02424] rounded-full" />
               <span>YOUR TRUSTED TECH PARTNER</span>
-            </div>
+            </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-extrabold text-slate-950 tracking-[-0.03em] leading-[1.08]">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.7, delay: isReady ? 0.2 : 0, ease: 'easeOut' }}
+              className="text-6xl sm:text-7xl lg:text-[5.5rem] font-extrabold text-slate-950 tracking-[-0.03em] leading-[1.08]"
+            >
               Smarter <br />
               Technology <br />
               A Brighter <br />
               <span className="text-[#E02424]">Tomorrow.</span>
-            </h1>
+            </motion.h1>
 
             {/* Subtitle */}
-            <p className="text-slate-600 text-lg sm:text-xl max-w-xl leading-relaxed font-normal">
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ duration: 0.6, delay: isReady ? 0.35 : 0 }}
+              className="text-slate-600 text-lg sm:text-xl max-w-xl leading-relaxed font-normal"
+            >
               Quality devices, genuine products and expert support — everything you need, all in one place.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons Row */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ duration: 0.6, delay: isReady ? 0.45 : 0 }}
+              className="flex flex-wrap items-center gap-3.5 pt-1"
+            >
               {/* Explore Products Button */}
-              <button
+              <motion.button
                 id="hero-explore-btn"
                 onClick={onExploreClick}
-                className="inline-flex items-center gap-3 bg-[#E02424] hover:bg-[#C81E1E] active:bg-[#9B1C1C] text-white font-semibold text-base sm:text-lg px-6 py-3 rounded-full transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-3 bg-[#E02424] hover:bg-[#C81E1E] active:bg-[#9B1C1C] text-white font-semibold text-base sm:text-lg px-6 py-3 rounded-full transition-colors duration-200 shadow-sm hover:shadow-md cursor-pointer group"
               >
                 <span>Explore Products</span>
                 <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
                   <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform" />
                 </span>
-              </button>
+              </motion.button>
 
               {/* Learn More Button */}
-              <button
+              <motion.button
                 id="hero-learn-more-btn"
                 onClick={onLearnMoreClick}
-                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold text-base sm:text-lg px-6 py-3 rounded-full border border-slate-300 hover:border-slate-400 transition-all duration-200 cursor-pointer group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 font-semibold text-base sm:text-lg px-6 py-3 rounded-full border border-slate-300 hover:border-slate-400 transition-colors duration-200 cursor-pointer group"
               >
                 <span>Learn More</span>
                 <ArrowRight className="w-3.5 h-3.5 text-slate-600 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* 3 Trust Badges */}
-            <div className="pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 sm:gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: isReady ? 0.55 : 0 }}
+              className="pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 sm:gap-4"
+            >
               {/* Badge 1 */}
               <div className="flex items-start gap-2">
                 <ShieldCheck className="w-5 h-5 text-[#E02424] flex-shrink-0 mt-0.5" />
@@ -91,31 +130,41 @@ export function HeroSection({
                   <div className="text-sm sm:text-base text-slate-500 leading-tight">by Thousands</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Hero Store Showroom Image */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative rounded-3xl overflow-hidden bg-slate-700 group">
+          <motion.div
+            initial={{ opacity: 0, x: 30, scale: 0.98 }}
+            animate={isReady ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: 30, scale: 0.98 }}
+            transition={{ duration: 0.8, delay: isReady ? 0.25 : 0, ease: 'easeOut' }}
+            className="lg:col-span-6 relative"
+          >
+            <div className="relative rounded-3xl overflow-hidden bg-slate-700 group shadow-xl">
               
               {/* Showroom Image Container */}
               <div className="relative aspect-[4/3] sm:aspect-[16/12] w-full overflow-hidden">
                 <img
                   src="/nath_showroom.png"
                   alt="Nath Communications Retail Experience"
-                  className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
                 
                 {/* Visual Glass Storefront Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/20" />
-                                {/* Left White Fade Overlay */}
+                {/* Left White Fade Overlay */}
                 <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white via-white/60 to-transparent pointer-events-none" />
               </div>
 
               {/* Floating Bottom Card: "Your One-Stop Tech Destination" */}
-              <div className="absolute bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 sm:w-72 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl space-y-4">
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 25 }}
+                transition={{ duration: 0.6, delay: isReady ? 0.55 : 0 }}
+                className="absolute bottom-4 right-4 left-4 sm:left-auto sm:right-6 sm:bottom-6 sm:w-72 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-2xl space-y-4"
+              >
                 {/* Red Accent Line */}
                 <div className="w-8 h-0.5 bg-[#E02424] rounded-full" />
 
@@ -159,10 +208,10 @@ export function HeroSection({
                     <span className="block text-xs text-slate-500 font-medium mt-0.5">Customer Satisfaction</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import { MAIN_CATEGORIES } from '../data/mockData';
 import { CategoryItem } from '../types';
 
@@ -12,11 +13,17 @@ export function ShopByCategory({
   onViewAllClick,
 }: ShopByCategoryProps) {
   return (
-    <section id="products" className="py-12 sm:py-16 lg:py-20 bg-slate-50/60 relative">
+    <section id="products" className="py-12 sm:py-16 lg:py-20 bg-slate-50/60 relative overflow-hidden">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12"
+        >
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-base font-bold tracking-widest text-slate-700 uppercase">
               <span className="w-5 h-0.5 bg-red-600 rounded-full" />
@@ -31,23 +38,30 @@ export function ShopByCategory({
           </div>
 
           <div>
-            <button
+            <motion.button
               id="view-all-categories-btn"
               onClick={onViewAllClick}
-              className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-800 text-base sm:text-lg font-semibold px-5 py-2.5 rounded-full border border-slate-300 transition-all duration-200 shadow-sm cursor-pointer group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-800 text-base sm:text-lg font-semibold px-5 py-2.5 rounded-full border border-slate-300 transition-colors duration-200 shadow-sm cursor-pointer group"
             >
               <span>View All Categories</span>
               <ArrowRight className="w-4 h-4 text-slate-600 group-hover:translate-x-0.5 transition-transform" />
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Categories Grid - 6 Items matching the screenshot */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
-          {MAIN_CATEGORIES.map((category) => (
-            <div
+          {MAIN_CATEGORIES.map((category, idx) => (
+            <motion.div
               key={category.id}
               onClick={() => onSelectCategory(category)}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{ duration: 0.45, delay: idx * 0.08, ease: 'easeOut' }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
               className="group bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 hover:border-red-500/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer"
             >
               {/* Image Container with Soft Background */}
@@ -81,7 +95,7 @@ export function ShopByCategory({
                 </div>
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 

@@ -1,5 +1,6 @@
 import { useState, FormEvent, MouseEvent } from 'react';
 import { Instagram, Facebook, Youtube, MessageCircle, ArrowRight, Check, MapPin, Phone, Mail } from 'lucide-react';
+import { motion } from 'motion/react';
 import { Logo } from './Logo';
 
 interface FooterProps {
@@ -37,8 +38,14 @@ export function Footer({
   };
 
   return (
-    <footer id="contact" className="bg-[#0b0f17] text-slate-300 pt-16 pb-12 border-t border-slate-800">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+    <footer id="contact" className="bg-[#0b0f17] text-slate-300 pt-16 pb-12 border-t border-slate-800 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="w-full px-4 sm:px-6 lg:px-8"
+      >
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-slate-800/80">
@@ -248,7 +255,7 @@ export function Footer({
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 }

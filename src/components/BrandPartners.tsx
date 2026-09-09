@@ -1,4 +1,5 @@
 import { ShieldCheck } from 'lucide-react';
+import { motion } from 'motion/react';
 import { BRAND_PARTNERS } from '../data/mockData';
 
 interface BrandPartnersProps {
@@ -7,12 +8,18 @@ interface BrandPartnersProps {
 
 export function BrandPartners({ onSelectBrand }: BrandPartnersProps) {
   return (
-    <section className="py-8 sm:py-12 bg-white">
+    <section className="py-8 sm:py-12 bg-white overflow-hidden">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           
           {/* Left Dark Card matching screenshot */}
-          <div className="lg:col-span-4 rounded-3xl bg-[#0e1218] p-7 sm:p-9 text-white flex flex-col justify-center relative overflow-hidden shadow-lg border border-slate-900">
+          <motion.div
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="lg:col-span-4 rounded-3xl bg-[#0e1218] p-7 sm:p-9 text-white flex flex-col justify-center relative overflow-hidden shadow-lg border border-slate-900"
+          >
             <div className="space-y-2.5">
               <h3 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
                 Genuine Products <br />
@@ -22,16 +29,28 @@ export function BrandPartners({ onSelectBrand }: BrandPartnersProps) {
                 Wide range of top brands with warranty and assured quality.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Brand Logos Grid (2 rows x 6 cols on lg) */}
-          <div className="lg:col-span-8 bg-[#f8fafc] rounded-3xl p-4 sm:p-6 border border-slate-200/90 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: 25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="lg:col-span-8 bg-[#f8fafc] rounded-3xl p-4 sm:p-6 border border-slate-200/90 flex items-center justify-center"
+          >
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 w-full">
               {BRAND_PARTNERS.map((brand, idx) => (
-                <div
+                <motion.div
                   key={idx}
                   onClick={() => onSelectBrand?.(brand.name)}
-                  className="h-16 sm:h-20 bg-white rounded-2xl border border-slate-200 hover:border-red-500/40 hover:shadow-md transition-all duration-200 flex items-center justify-center px-3 cursor-pointer group select-none"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: idx * 0.035 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="h-16 sm:h-20 bg-white rounded-2xl border border-slate-200 hover:border-red-500/40 hover:shadow-md transition-shadow duration-200 flex items-center justify-center px-3 cursor-pointer group select-none"
                 >
                   {/* Brand Typography Styles */}
                   {brand.name === 'Apple' ? (
@@ -121,10 +140,10 @@ export function BrandPartners({ onSelectBrand }: BrandPartnersProps) {
                   ) : (
                     <span className="text-slate-800 font-bold text-xs">{brand.name}</span>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
