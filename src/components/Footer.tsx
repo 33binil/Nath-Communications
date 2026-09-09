@@ -6,12 +6,14 @@ interface FooterProps {
   onOpenStoreModal: () => void;
   onOpenContactModal: () => void;
   onOpenPolicyModal: (type: 'privacy' | 'terms' | 'faq' | 'warranty' | 'track') => void;
+  onComingSoon?: () => void;
 }
 
 export function Footer({
   onOpenStoreModal,
   onOpenContactModal,
   onOpenPolicyModal,
+  onComingSoon,
 }: FooterProps) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -27,11 +29,10 @@ export function Footer({
     }
   };
 
-  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleQuickLinkClick = (e: MouseEvent) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    if (onComingSoon) {
+      onComingSoon();
     }
   };
 
@@ -86,49 +87,49 @@ export function Footer({
             <h4 className="text-white font-bold text-xl tracking-tight">Quick Links</h4>
             <ul className="space-y-2.5 text-lg">
               <li>
-                <a
-                  href="#home"
-                  onClick={(e) => handleNavClick(e, '#home')}
-                  className="text-slate-400 hover:text-white transition-colors"
+                <button
+                  type="button"
+                  onClick={handleQuickLinkClick}
+                  className="text-slate-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Home
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#about"
-                  onClick={(e) => handleNavClick(e, '#about')}
-                  className="text-slate-400 hover:text-white transition-colors"
+                <button
+                  type="button"
+                  onClick={handleQuickLinkClick}
+                  className="text-slate-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   About
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#products"
-                  onClick={(e) => handleNavClick(e, '#products')}
-                  className="text-slate-400 hover:text-white transition-colors"
+                <button
+                  type="button"
+                  onClick={handleQuickLinkClick}
+                  className="text-slate-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Products
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#services"
-                  onClick={(e) => handleNavClick(e, '#services')}
-                  className="text-slate-400 hover:text-white transition-colors"
+                <button
+                  type="button"
+                  onClick={handleQuickLinkClick}
+                  className="text-slate-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Services
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#contact"
-                  onClick={(e) => handleNavClick(e, '#contact')}
-                  className="text-slate-400 hover:text-white transition-colors"
+                <button
+                  type="button"
+                  onClick={handleQuickLinkClick}
+                  className="text-slate-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Contact
-                </a>
+                </button>
               </li>
             </ul>
           </div>

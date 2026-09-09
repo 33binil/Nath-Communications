@@ -112,7 +112,7 @@ export function Navbar({
             {/* Search Icon Button */}
             <button
               id="navbar-search-btn"
-              onClick={onOpenSearch}
+              onClick={onComingSoon}
               aria-label="Search tech products and accessories"
               className="p-2.5 text-slate-700 hover:text-red-600 hover:bg-slate-100 rounded-full transition-colors cursor-pointer border border-slate-200"
             >
@@ -136,7 +136,7 @@ export function Navbar({
           <div className="flex items-center gap-2 md:hidden">
             <button
               id="navbar-mobile-search-btn"
-              onClick={onOpenSearch}
+              onClick={onComingSoon}
               aria-label="Search"
               className="p-2 text-slate-700 hover:bg-slate-100 rounded-full border border-slate-200"
             >

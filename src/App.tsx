@@ -115,7 +115,7 @@ export default function App() {
       {/* Top Navigation Bar */}
       <Navbar
         activeSection={activeSection}
-        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenSearch={() => setIsComingSoonOpen(true)}
         onOpenStoreModal={() => setIsStoreModalOpen(true)}
         onOpenContactModal={() => {
           setContactDefaultTopic('General Inquiry');
@@ -148,7 +148,7 @@ export default function App() {
         {/* 5. Shop by Category (6 Visual Cards) */}
         <ShopByCategory
           onSelectCategory={handleSelectCategoryCard}
-          onViewAllClick={() => setIsSearchOpen(true)}
+          onViewAllClick={() => setIsComingSoonOpen(true)}
         />
 
         {/* 6. Genuine Products & Trusted Brands Partner Grid */}
@@ -175,6 +175,7 @@ export default function App() {
           setIsContactModalOpen(true);
         }}
         onOpenPolicyModal={(type) => setPolicyModalType(type)}
+        onComingSoon={() => setIsComingSoonOpen(true)}
       />
 
       {/* Floating Quick Action Widget for WhatsApp, Showroom & Loading Page */}
@@ -241,29 +242,29 @@ export default function App() {
 
       {/* Coming Soon Overlay */}
       {isComingSoonOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="relative bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden p-8">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="relative bg-white rounded-2xl sm:rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[calc(100dvh-1.5rem)] p-6 sm:p-8">
             <button
               onClick={() => setIsComingSoonOpen(false)}
               aria-label="Close"
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <div className="text-center space-y-3">
-              <div className="w-16 h-16 mx-auto rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-3xl font-black text-amber-600">
+            <div className="text-center space-y-3 pt-2 sm:pt-0">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-2xl sm:text-3xl font-black text-amber-600">
                 !
               </div>
-              <h3 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 Coming Soon
               </h3>
-              <p className="text-slate-600 text-base leading-relaxed max-w-xs mx-auto">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
                 This section is under construction. Stay tuned for exciting updates!
               </p>
               <button
                 onClick={() => setIsComingSoonOpen(false)}
-                className="mt-3 inline-flex items-center justify-center bg-slate-900 hover:bg-black text-white font-semibold text-base px-6 py-3 rounded-full transition-all cursor-pointer"
+                className="mt-3 inline-flex items-center justify-center bg-slate-900 hover:bg-black text-white font-semibold text-sm sm:text-base px-6 py-2.5 sm:py-3 rounded-full transition-all cursor-pointer"
               >
                 Got it
               </button>
